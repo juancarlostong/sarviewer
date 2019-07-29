@@ -19,8 +19,8 @@ if [ $# -ne 0 ];then
 elif [ "$graph_generator" == "gnuplot" ];then
 	cd plotters/gnuplot
 	gnuplot loadaverage.gplot
-	gnuplot tasks.gplot
-	gnuplot cpu.gplot
+	##gnuplot tasks.gplot
+	##gnuplot cpu.gplot
 	gnuplot ram.gplot
 	gnuplot swap.gplot
 	gnuplot iotransfer.gplot

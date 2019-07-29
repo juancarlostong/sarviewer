@@ -30,19 +30,19 @@ sar_collectors(){
 	# CPU
 	sar -u $sample_interval $number_of_samples | grep -v -E "CPU|Average|^$" > data/cpu.dat &
 	# RAM
-	sar -r $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/ram.dat &
+	sar -r $sample_interval $number_of_samples | grep -v -E "CPU|Average|kbmemfree|^$" > data/ram.dat &
 	# Swap
-	sar -S $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/swap.dat &
+	sar -S $sample_interval $number_of_samples | grep -v -E "CPU|Average|kbswpfree|^$" > data/swap.dat &
 	# Load average and tasks
-	sar -q $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/loadaverage.dat &
+	sar -q $sample_interval $number_of_samples | grep -v -E "CPU|Average|runq-sz|^$" > data/loadaverage.dat &
 	# IO transfer
-	sar -b $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/iotransfer.dat &
+	sar -b $sample_interval $number_of_samples | grep -v -E "CPU|Average|tps|^$" > data/iotransfer.dat &
 	# Process/context switches
-	sar -w $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/proc.dat &
+	sar -w $sample_interval $number_of_samples | grep -v -E "CPU|Average|proc|^$" > data/proc.dat &
 	# Network Interface
-	sar -n DEV $sample_interval $number_of_samples | grep $network_interface | grep -v "Average" > data/netinterface.dat &
+	#sar -n DEV $sample_interval $number_of_samples | grep $network_interface | grep -v "Average" > data/netinterface.dat &
 	# Sockets
-	sar -n SOCK $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/sockets.dat &
+	#sar -n SOCK $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/sockets.dat &
 
   sleep 5
 	#total_time=$(($sample_interval * $number_of_samples))
@@ -131,10 +131,10 @@ elif [ "$#" -ne 0 ];then
 	done
 	# Begin collecting data with sar
   number_of_samples=""
+  echo "data collection has started"
 	sar_collectors
 
 	# Call plotter.sh to generate the graphs
-  echo "./plotter.sh must be called explicitly to generate graphs"
 	# ./plotter.sh
 
 	# Send mail if specified

@@ -24,10 +24,10 @@ elif [ "$graph_generator" == "gnuplot" ];then
 	gnuplot ram.gplot
 	gnuplot swap.gplot
 	gnuplot iotransfer.gplot
-	gnuplot proc.gplot
-	gnuplot contextsw.gplot
-	gnuplot netinterface.gplot
-	gnuplot sockets.gplot
+	#gnuplot proc.gplot
+	#gnuplot contextsw.gplot
+	#gnuplot netinterface.gplot
+	#gnuplot sockets.gplot
 elif [ "$graph_generator" == "matplotlib" ];then
 	cd plotters/matplotlib
 	python loadaverage.py

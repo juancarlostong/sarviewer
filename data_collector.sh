@@ -38,7 +38,7 @@ sar_collectors(){
 	# IO transfer
 	sar -b $sample_interval $number_of_samples | grep -v -E "CPU|Average|tps|^$" > data/iotransfer.dat &
 	# Process/context switches
-	sar -w $sample_interval $number_of_samples | grep -v -E "CPU|Average|proc|^$" > data/proc.dat &
+	#sar -w $sample_interval $number_of_samples | grep -v -E "CPU|Average|proc|^$" > data/proc.dat &
 	# Network Interface
 	#sar -n DEV $sample_interval $number_of_samples | grep $network_interface | grep -v "Average" > data/netinterface.dat &
 	# Sockets

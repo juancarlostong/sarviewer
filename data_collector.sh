@@ -44,23 +44,24 @@ sar_collectors(){
 	# Sockets
 	sar -n SOCK $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/sockets.dat &
 
-	total_time=$(($sample_interval * $number_of_samples))
-	echo "Taking ${number_of_samples} samples with ${sample_interval} seconds interval"
-	echo "Total time to collect all data: ${total_time} seconds"
-	echo "----------------------------------"
-	echo ">>> Collecting data"
-	echo ">>> Please wait until data collection is completed"
-	echo "----------------------------------"
-	echo "- You can abort this script with Ctrl+C, but have in mind the data will stop being collected when you cancel it."
-	echo "- You will also need to manually launch script plotter.sh to generate the graphs."
-	sleep $total_time
+  sleep 5
+	#total_time=$(($sample_interval * $number_of_samples))
+	#echo "Taking ${number_of_samples} samples with ${sample_interval} seconds interval"
+	#echo "Total time to collect all data: ${total_time} seconds"
+	#echo "----------------------------------"
+	#echo ">>> Collecting data"
+	#echo ">>> Please wait until data collection is completed"
+	#echo "----------------------------------"
+	#echo "- You can abort this script with Ctrl+C, but have in mind the data will stop being collected when you cancel it."
+	#echo "- You will also need to manually launch script plotter.sh to generate the graphs."
+	#sleep $total_time
 
 	# Added additional sleep of 5 seconds to avoid "warning: Skipping data file with no valid points"
-	echo "----------------------------------"
-	echo ">>> Just 5 seconds more while processing all data"
-	echo "----------------------------------"
-	sleep 5
-	echo "Done!"
+	#echo "----------------------------------"
+	#echo ">>> Just 5 seconds more while processing all data"
+	#echo "----------------------------------"
+	#sleep 5
+	#echo "Done!"
 }
 
 howtouse(){
@@ -129,10 +130,12 @@ elif [ "$#" -ne 0 ];then
 		esac
 	done
 	# Begin collecting data with sar
+  number_of_samples=""
 	sar_collectors
 
 	# Call plotter.sh to generate the graphs
-	./plotter.sh
+  echo "./plotter.sh must be called explicitly to generate graphs"
+	# ./plotter.sh
 
 	# Send mail if specified
 	if [[ $mail_to ]];then

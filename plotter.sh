@@ -19,31 +19,41 @@ if [ $# -ne 0 ];then
 elif [ "$graph_generator" == "gnuplot" ];then
 	cd plotters/gnuplot
   if [[ -e ../../data/loadaverage.dat ]]; then
-	  gnuplot loadaverage.gplot
+    echo "loadaverage.gplot"
+    gnuplot loadaverage.gplot
   fi
-	if [[ -e ../../data/loadaverage.dat ]]; then
+  if [[ -e ../../data/loadaverage.dat ]]; then
+    echo "tasks.gplot"
     gnuplot tasks.gplot
   fi
   if [[ -e ../../data/cpu.dat ]]; then
+    echo "cpu.gplot"
 	  gnuplot cpu.gplot
   fi
   if [[ -e ../../data/ram.dat ]]; then
+    echo "ram.gplot"
 	  gnuplot ram.gplot
   fi
   if [[ -e ../../data/swap.dat ]]; then
+    echo "swap.gplot"
 	  gnuplot swap.gplot
   fi
   if [[ -e ../../data/iotransfer.dat ]]; then
+    echo "iotransfer.gplot"
 	  gnuplot iotransfer.gplot
   fi
   if [[ -e ../../data/proc.dat ]]; then
+    echo "proc.gplot"
 	  gnuplot proc.gplot
+    echo "contextsw.gplot"
 	  gnuplot contextsw.gplot
   fi
 	if [[ -e ../../data/netinterface.dat ]]; then
+    echo "netinterface.gplot"
     gnuplot netinterface.gplot
   fi
   if [[ -e ../../data/sockets.dat ]]; then
+    echo "sockets.gplot"
 	  gnuplot sockets.gplot
   fi
 elif [ "$graph_generator" == "matplotlib" ];then

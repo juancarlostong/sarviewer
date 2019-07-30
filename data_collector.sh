@@ -42,9 +42,9 @@ sar_collectors(){
 	# Process/context switches
 	sar -w $sample_interval $number_of_samples | grep -v -E "CPU|Average|proc|^$" > data/proc.dat &
 	# Network Interface
-	#sar -n DEV $sample_interval $number_of_samples | grep $network_interface | grep -v "Average" > data/netinterface.dat &
+	sar -n DEV $sample_interval $number_of_samples | grep $network_interface | grep -v "Average" > data/netinterface.dat &
 	# Sockets
-	#sar -n SOCK $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/sockets.dat &
+	sar -n SOCK $sample_interval $number_of_samples | grep -v -E "[a-zA-Z]|^$" > data/sockets.dat &
 
   sleep 5
 	#total_time=$(($sample_interval * $number_of_samples))

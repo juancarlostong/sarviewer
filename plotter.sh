@@ -18,16 +18,34 @@ if [ $# -ne 0 ];then
 	echo "This script doesn't accept parameters"
 elif [ "$graph_generator" == "gnuplot" ];then
 	cd plotters/gnuplot
-	gnuplot loadaverage.gplot
-	##gnuplot tasks.gplot
-	gnuplot cpu.gplot
-	gnuplot ram.gplot
-	gnuplot swap.gplot
-	gnuplot iotransfer.gplot
-	#gnuplot proc.gplot
-	#gnuplot contextsw.gplot
-	#gnuplot netinterface.gplot
-	#gnuplot sockets.gplot
+  if [[ -e ../../data/loadaverage.dat ]]; then
+	  gnuplot loadaverage.gplot
+  fi
+	if [[ -e ../../data/loadaverage.dat ]]; then
+    gnuplot tasks.gplot
+  fi
+  if [[ -e ../../data/cpu.dat ]]; then
+	  gnuplot cpu.gplot
+  fi
+  if [[ -e ../../data/ram.dat ]]; then
+	  gnuplot ram.gplot
+  fi
+  if [[ -e ../../data/swap.dat ]]; then
+	  gnuplot swap.gplot
+  fi
+  if [[ -e ../../data/iotransfer.dat ]]; then
+	  gnuplot iotransfer.gplot
+  fi
+  if [[ -e ../../data/proc.dat ]]; then
+	  gnuplot proc.gplot
+	  gnuplot contextsw.gplot
+  fi
+	if [[ -e ../../data/netinterface.dat ]]; then
+    gnuplot netinterface.gplot
+  fi
+  if [[ -e ../../data/sockets.dat ]]; then
+	  gnuplot sockets.gplot
+  fi
 elif [ "$graph_generator" == "matplotlib" ];then
 	cd plotters/matplotlib
 	python loadaverage.py

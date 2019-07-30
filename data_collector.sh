@@ -26,17 +26,19 @@ cd $(dirname $0)
 # FUNCTIONS
 # ======================
 
+SAR="LC_ALL='POSIX' sar"
+
 sar_collectors(){
 	# CPU
-	sar -u $sample_interval $number_of_samples | grep -v -E "CPU|Average|^$" > data/cpu.dat &
+	$SAR -u $sample_interval $number_of_samples | grep -v -E "CPU|Average|^$" > data/cpu.dat &
 	# RAM
-	sar -r $sample_interval $number_of_samples | grep -v -E "CPU|Average|kbmemfree|^$" > data/ram.dat &
+	$SAR -r $sample_interval $number_of_samples | grep -v -E "CPU|Average|kbmemfree|^$" > data/ram.dat &
 	# Swap
-	sar -S $sample_interval $number_of_samples | grep -v -E "CPU|Average|kbswpfree|^$" > data/swap.dat &
+	$SAR -S $sample_interval $number_of_samples | grep -v -E "CPU|Average|kbswpfree|^$" > data/swap.dat &
 	# Load average and tasks
-	sar -q $sample_interval $number_of_samples | grep -v -E "CPU|Average|runq-sz|^$" > data/loadaverage.dat &
+	$SAR -q $sample_interval $number_of_samples | grep -v -E "CPU|Average|runq-sz|^$" > data/loadaverage.dat &
 	# IO transfer
-	sar -b $sample_interval $number_of_samples | grep -v -E "CPU|Average|tps|^$" > data/iotransfer.dat &
+	$SAR -b $sample_interval $number_of_samples | grep -v -E "CPU|Average|tps|^$" > data/iotransfer.dat &
 	# Process/context switches
 	#sar -w $sample_interval $number_of_samples | grep -v -E "CPU|Average|proc|^$" > data/proc.dat &
 	# Network Interface
